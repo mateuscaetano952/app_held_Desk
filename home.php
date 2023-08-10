@@ -16,11 +16,24 @@
 
   <body>
 
+  <?php
+    
+      require_once('validado_de_sessao.php');
+
+  ?>
+
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">
         <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
         App Help Desk
-      </a>
+        </a>
+        <ul class="navbar-nav me-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="logo_off.php">Sair</a>
+      </li>
+   
+    </ul>
+      
     </nav>
 
     <div class="container">    
