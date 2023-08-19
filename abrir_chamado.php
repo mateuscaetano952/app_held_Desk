@@ -17,7 +17,8 @@
   <body>
 
   <?php
-   
+    session_start();
+
    require_once('validado_de_sessao.php');
 
   ?>
@@ -26,6 +27,13 @@
       <a class="navbar-brand" href="#">
         <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
         App Help Desk
+        <ul class="navbar-nav me-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="logo_off.php">Sair</a>
+      </li>
+   
+    </ul>
+
       </a>
     </nav>
 
@@ -36,36 +44,41 @@
           <div class="card">
             <div class="card-header">
               Abertura de chamado
+              <?php
+                  if($_GET['sucesso'] == 'sim'){
+              ?>
+              <div class="text-success">inserido com sucesso</div>
+              <?php } ?>
             </div>
             <div class="card-body">
               <div class="row">
                 <div class="col">
                   
-                  <form>
+                  <form action="registra_chamado.php" method="post">
                     <div class="form-group">
                       <label>Título</label>
-                      <input type="text" class="form-control" placeholder="Título">
+                      <input name="titulo" type="text" class="form-control" placeholder="Título">
                     </div>
                     
                     <div class="form-group">
                       <label>Categoria</label>
-                      <select class="form-control">
+                      <select name="tipo" class="form-control">
                         <option>Criação Usuário</option>
-                        <option>Impressora</option>
-                        <option>Hardware</option>
-                        <option>Software</option>
-                        <option>Rede</option>
+                        <option value="Impressora">Impressora</option>
+                        <option value="Hardware">Hardware</option>
+                        <option value="Software">Software</option>
+                        <option value="Rede">Rede</option>
                       </select>
                     </div>
                     
                     <div class="form-group">
                       <label>Descrição</label>
-                      <textarea class="form-control" rows="3"></textarea>
+                      <textarea name="descricao" class="form-control" rows="3"></textarea>
                     </div>
 
                     <div class="row mt-5">
                       <div class="col-6">
-                        <button class="btn btn-lg btn-warning btn-block" type="submit">Voltar</button>
+                        <a href="./home.php" class="btn btn-lg btn-warning btn-block" type="submit">Voltar</a>
                       </div>
 
                       <div class="col-6">

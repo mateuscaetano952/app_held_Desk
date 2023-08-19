@@ -16,10 +16,22 @@
 
   <body>
 
-  <?php
-    
-    require_once('validado_de_sessao.php');
 
+  <?php
+  session_start();
+  require_once('validado_de_sessao.php');  
+  ?>
+    
+  <?php
+  $arquivo = fopen("listaDeChamados", "r");
+  $arrayDeChamados = array();
+    
+    while(!feof($arquivo)){
+      $texto = fgets($arquivo);
+      $arrayDeChamados[] = $texto; 
+
+    }
+    fclose($arquivo);
   ?>
 
     <nav class="navbar navbar-dark bg-dark">
@@ -39,28 +51,27 @@
             </div>
             
             <div class="card-body">
+            <?php  
+            foreach($arrayDeChamados as $chamado){
               
+
+              $chamadosDados = explode('#', $chamado);
+              if($chamadosDados[3] == $_SESSION['id'] || $_SESSION['id'] == '1'){   
+              
+            ?>
               <div class="card mb-3 bg-light">
                 <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
+                  <h5 class="card-title"><?php echo $chamadosDados[0]; ?></h5>
+                  <h6 class="card-subtitle mb-2 text-muted"><?php echo $chamadosDados[1]; ?></h6>
+                  <p class="card-text"><?php echo $chamadosDados[2]; ?></p>
 
                 </div>
               </div>
-
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
-
-                </div>
-              </div>
-
-              <div class="row mt-5">
+            <?php } } ?>  
+              
+            <div class="row mt-5">
                 <div class="col-6">
-                  <button class="btn btn-lg btn-warning btn-block" type="submit">Voltar</button>
+                  <a href="home.php" class="btn btn-lg btn-warning btn-block" type="submit">Voltar</a>
                 </div>
               </div>
             </div>
